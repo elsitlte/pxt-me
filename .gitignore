@@ -4,6 +4,7 @@ yotta_modules
 yotta_targets
 pxt_modules
 projects
+_locales
 *.db
 *.tgz
 .idea
