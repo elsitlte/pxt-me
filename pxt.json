@@ -8,8 +8,7 @@
     },
     "files": [
         "README.md",
-        "magi-super-driver.ts",
-        "_locales/zh/magi-super-driver-strings.json"
+        "magi-super-driver.ts"
     ],
     "testFiles": [
         "magi-super-driver-test.ts"
