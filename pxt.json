@@ -1,0 +1,27 @@
+{
+    "name": "magiSuperDriver",
+    "version": "18.730.10",
+    "description": "magiSuperDriver package for Micro:bit",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "magiSuperDriver.ts"
+    ],
+    "testFiles": [
+        "magiSuperDriverTest.ts"
+    ],
+    "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "enabled": 0
+                }
+            }
+        }
+    },
+    "public": true,
+    "installedVersion": "github:elsitlte/pxt-magiSuperDriver#v18.730.10"
+}
