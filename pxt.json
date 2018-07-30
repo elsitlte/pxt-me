@@ -8,10 +8,10 @@
     },
     "files": [
         "README.md",
-        "magiSuperDriver.ts"
+        "magi-super-driver.ts"
     ],
     "testFiles": [
-        "magiSuperDriverTest.ts"
+        "magi-super-driver-test.ts"
     ],
     "yotta": {
         "config": {
