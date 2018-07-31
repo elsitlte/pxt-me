@@ -1,5 +1,5 @@
 {
-    "name": "magi-super-driver",
+    "name": "me",
     "version": "18.730.10",
     "description": "magiSuperDriver package for Micro:bit",
     "license": "MIT",
@@ -22,6 +22,5 @@
             }
         }
     },
-    "public": true,
-    "installedVersion": "github:elsitlte/pxt-me#v18.730.10"
+    "public": true
 }
