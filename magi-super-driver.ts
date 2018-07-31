@@ -4,7 +4,7 @@
  * The most important macro "block" specifies that a
  * block should be generated for a **exported** function.
  */
-//% color="#AA278D" icon="\uf1b9" advanced=true
+//% color="#AA278D" icon="\uf039" advanced=true
 namespace magiSuperDriver {
 
     //% block
