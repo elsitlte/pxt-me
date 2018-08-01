@@ -109,7 +109,7 @@ namespace magiSuperDriver {
 
     let initialized = false
     let initializedMatrix = false
-    let neoStrip: neopixel.Strip;
+    //let neoStrip: neopixel.Strip;
     let matBuf = pins.createBuffer(17);
     let distanceBuf = 0;
 
@@ -218,7 +218,7 @@ namespace magiSuperDriver {
 
     /**
      * Init RGB pixels mounted on robotbit
-     */
+    
     //% blockId="robotbit_rgb" block="RGB"
     //% weight=5
     export function rgb(): neopixel.Strip {
@@ -228,7 +228,8 @@ namespace magiSuperDriver {
 
         return neoStrip;
     }
-
+    */
+    
     /**
      * Servo Execute
      * @param index Servo Channel; eg: S1
