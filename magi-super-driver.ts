@@ -13,19 +13,11 @@
  * The most important macro "block" specifies that a
  * block should be generated for a **exported** function.
  */
-//% color="#AA278D" icon="\uf039" advanced=true
+//% color="#AAc044" icon="\uf29e"
 namespace magiSuperDriver {
 
     //% block
     export function helloWorld() {
-
-    }
-
-    // note that Caml casing yields lower case
-    // block text with spaces
-
-    //% block
-    export function camlCaseTwo() {
 
     }
 
@@ -229,7 +221,7 @@ namespace magiSuperDriver {
         return neoStrip;
     }
     */
-    
+
     /**
      * Servo Execute
      * @param index Servo Channel; eg: S1
