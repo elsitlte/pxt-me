@@ -240,7 +240,7 @@ namespace magiSuperDriver {
 
         //% blockId=robotbit_motor_run block="Motor|%index|running with direction|%direction|and speed %speed"
         //% weight=85
-        //% speed.min=-255 speed.max=255
+        //% speed.min=-1024 speed.max=1024
         //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
         export function MotorRun(index: Motors, speed: number,direction: Directions): void {
             if (!initialized) {
