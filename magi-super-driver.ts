@@ -78,8 +78,8 @@ namespace magiSuperDriver {
     }
 
     export enum Steppers {
-        M1 = 0x1,
-        M2 = 0x2
+        Step_1 = 0x1,
+        Step_2 = 0x2
     }
 
     export enum Turns {
