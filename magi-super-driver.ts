@@ -100,7 +100,8 @@ namespace magiSuperDriver {
     }
 
     let initialized = false
-
+    let initializedMatrix = false
+    let neoStrip: neopixel.Strip;
     let matBuf = pins.createBuffer(17);
     let distanceBuf = 0;
 
@@ -193,6 +194,31 @@ namespace magiSuperDriver {
     function stopMotor(index: number) {
         setPwm((index - 1) * 2, 0, 0);
         setPwm((index - 1) * 2 + 1, 0, 0);
+    }
+
+    function matrixInit() {
+        i2ccmd(HT16K33_ADDRESS, 0x21);// turn on oscillator
+        i2ccmd(HT16K33_ADDRESS, HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON | (0 << 1));
+        i2ccmd(HT16K33_ADDRESS, HT16K33_CMD_BRIGHTNESS | 0xF);
+    }
+
+    function matrixShow() {
+        matBuf[0] = 0x00;
+        pins.i2cWriteBuffer(HT16K33_ADDRESS, matBuf);
+    }
+
+
+    /**
+     * Init RGB pixels mounted on robotbit
+     */
+    //% blockId="robotbit_rgb" block="RGB"
+    //% weight=5
+    export function rgb(): neopixel.Strip {
+        if (!neoStrip) {
+            neoStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
+        }
+
+        return neoStrip;
     }
 
     /**
@@ -292,7 +318,7 @@ namespace magiSuperDriver {
         setStepper(2, delay > 0);
         delay = Math.abs(delay);
         basic.pause(delay);
-        MotorStopAll()	
+        MotorStopAll()    
     }
 
     /**
@@ -393,6 +419,70 @@ namespace magiSuperDriver {
         for (let idx = 1; idx <= 4; idx++) {
             stopMotor(idx);
         }
+    }
+
+    //% blockId=robotbit_matrix_draw block="Matrix Draw|X %x|Y %y"
+    //% weight=69
+    export function MatrixDraw(x: number, y: number): void {
+        if (!initializedMatrix) {
+            matrixInit();
+            initializedMatrix = true;
+        }
+        let idx = y * 2 + x / 8;
+        matBuf[idx + 1] |= (1 << (x % 8));
+        matrixShow();
+    }
+
+    /*
+    //% blockId=robotbit_matrix_clean block="Matrix Clean|X %x|Y %y"
+    //% weight=68
+    export function MatrixClean(x: number, y: number): void {
+        if (!initializedMatrix) {
+            matrixInit();
+            initializedMatrix = true;
+        }
+        let idx = y * 2 + x / 8;
+        // todo: bitwise not throw err 
+        matBuf[idx + 1] &=~(1 << (x % 8));
+        matrixShow();
+    }
+    */
+
+    //% blockId=robotbit_matrix_clear block="Matrix Clear"
+    //% weight=65
+    //% blockGap=50
+    export function MatrixClear(): void {
+        if (!initializedMatrix) {
+            matrixInit();
+            initializedMatrix = true;
+        }
+        for (let i = 0; i < 16; i++) {
+            matBuf[i + 1] = 0;
+        }
+        matrixShow();
+    }
+
+    //% blockId=robotbit_ultrasonic block="Ultrasonic|pin %pin"
+    //% weight=10
+    export function Ultrasonic(pin: DigitalPin): number {
+
+        // send pulse
+        pins.setPull(pin, PinPullMode.PullNone);
+        pins.digitalWritePin(pin, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(pin, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(pin, 0);
+
+        // read pulse
+        let d = pins.pulseIn(pin, PulseValue.High, 25000);
+        let ret = d;
+        // filter timeout spikes
+        if (ret == 0 && distanceBuf!= 0){
+            ret = distanceBuf;
+        }
+        distanceBuf = d;
+        return ret*10/6/58;
     }
 
 }
