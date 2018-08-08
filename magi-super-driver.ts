@@ -244,7 +244,7 @@ namespace magiSuperDriver {
         //% weight=85
         //% speed.min=-1024 speed.max=1024
         //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-        export function MotorRun(index: Motors, speed: number,direction: Directions): void {
+        export function MotorRun(index: Motors, direction: Directions, speed: number): void {
             if (!initialized) {
                 initPCA9685()
             }
