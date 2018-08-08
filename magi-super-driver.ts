@@ -196,25 +196,6 @@ namespace magiSuperDriver {
         setPwm((index - 1) * 2 + 1, 0, 0);
     }
 
-    function matrixInit() {
-        i2ccmd(HT16K33_ADDRESS, 0x21);// turn on oscillator
-        i2ccmd(HT16K33_ADDRESS, HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON | (0 << 1));
-        i2ccmd(HT16K33_ADDRESS, HT16K33_CMD_BRIGHTNESS | 0xF);
-    }
-
-    /**
-     * Init RGB pixels mounted on robotbit
-     */
-    //% blockId="robotbit_rgb" block="RGB"
-    //% weight=5
-    export function rgb(): neopixel.Strip {
-        if (!neoStrip) {
-            neoStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
-        }
-
-        return neoStrip;
-    }
-
     /**
      * Servo Execute
      * @param index Servo Channel; eg: S1
