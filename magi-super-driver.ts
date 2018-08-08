@@ -71,7 +71,7 @@ namespace magiSuperDriver {
     }
 
     export enum Motors {
-        MS2 = 0x1,
+        MS1 = 0x1,
         MS2 = 0x2,
         MS3 = 0x3,
         MS4 = 0x4
