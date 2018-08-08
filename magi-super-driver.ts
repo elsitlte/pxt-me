@@ -99,8 +99,10 @@ namespace magiSuperDriver {
         T5B0 = 1800
     }
     export enum Directions {
-        0,
-        1
+        //% block="0"
+        backward=0,
+        //% block="1"
+        forward=1
     }
     let initialized = false
     let initializedMatrix = false
