@@ -71,10 +71,10 @@ namespace magiSuperDriver {
     }
 
     export enum Motors {
-        M1A = 0x1,
-        M1B = 0x2,
-        M2A = 0x3,
-        M2B = 0x4
+        MS2 = 0x1,
+        MS2 = 0x2,
+        MS3 = 0x3,
+        MS4 = 0x4
     }
 
     export enum Steppers {
@@ -98,7 +98,10 @@ namespace magiSuperDriver {
         //% blockId="T5B0" block="5"
         T5B0 = 1800
     }
-
+    export enum Directions {
+        0,
+        1
+    }
     let initialized = false
     let initializedMatrix = false
     let neoStrip: neopixel.Strip;
@@ -215,7 +218,7 @@ namespace magiSuperDriver {
             setPwm(index + 7, 0, value)
         }
         
-        //% blockId=robotbit_stepper_degree block="Stepper 28BYJ-48|%index|degree %degree"
+        //% blockId=robotbit_stepper_degree block="Stepper |%index|degree %degree"
         //% weight=90
         export function StepperDegree(index: Steppers, degree: number): void {
             if (!initialized) {
@@ -228,22 +231,22 @@ namespace magiSuperDriver {
         }
 
 
-        //% blockId=robotbit_stepper_turn block="Stepper 28BYJ-48|%index|turn %turn"
+        //% blockId=robotbit_stepper_turn block="Stepper |%index|turn %turn"
         //% weight=90
         export function StepperTurn(index: Steppers, turn: Turns): void {
             let degree = turn;
             StepperDegree(index, degree);
         }
 
-        //% blockId=robotbit_motor_run block="Motor|%index|speed %speed"
+        //% blockId=robotbit_motor_run block="Motor|%index|running with direction|%direction|and speed %speed"
         //% weight=85
         //% speed.min=-255 speed.max=255
         //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-        export function MotorRun(index: Motors, speed: number): void {
+        export function MotorRun(index: Motors, speed: number,direction: Directions): void {
             if (!initialized) {
                 initPCA9685()
             }
-            speed = speed * 16; // map 255 to 4096
+            speed = speed * 4; // map 255 to 4096
             if (speed >= 4096) {
                 speed = 4095
             }
@@ -254,7 +257,7 @@ namespace magiSuperDriver {
                 return
             let pp = (index - 1) * 2
             let pn = (index - 1) * 2 + 1
-            if (speed >= 0) {
+            if (direction > 0) {
                 setPwm(pp, 0, speed)
                 setPwm(pn, 0, 0)
             } else {
