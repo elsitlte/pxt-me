@@ -14,7 +14,7 @@
  * block should be generated for a **exported** function.
  */
 //% color="#AAc044" icon="\uf29e"
-namespace magiSuperDriver {
+namespace me {
 
     //% block
     export function helloWorld() {
