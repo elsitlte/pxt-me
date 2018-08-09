@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld111() {
+    export function helloWorld112() {
 
     }
 
@@ -98,7 +98,14 @@ namespace me {
         //% blockId="T5B0" block="5"
         T5B0 = 1800
     }
-
+    
+    export enum Directions {
+        //% block="0"
+        backward=0,
+        //% block="1"
+        forward=1
+    }
+    
     let initialized = false
     let initializedMatrix = false
 
