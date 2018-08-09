@@ -275,9 +275,9 @@ namespace me {
     //% weight=85
     //% speed.min=-255 speed.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRun(index: Motors, direction: Directions,  speed: number): void {
+    // export function MotorRun(index: Motors, direction: Directions,  speed: number): void {
 
-    }
+    // }
 
     //% blockId=robotbit_stop block="Motor Stop|%index|"
     //% weight=80
