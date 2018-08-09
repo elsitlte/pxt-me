@@ -99,7 +99,7 @@ namespace me {
         T5B0 = 1800
     }
     
-    enum Directions {
+    export enum Directions {
         //% blockId="BACKWARD" block="0"
         BACKWARD = 0,
         //% blockId="FORWARD" block="1"
