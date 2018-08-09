@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld555() {
+    export function helloWorld666() {
 
     }
 
