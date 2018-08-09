@@ -13,11 +13,11 @@
  * The most important macro "block" specifies that a
  * block should be generated for a **exported** function.
  */
-//% color="#AAc044" icon="\uf29e"
+//% color="#AAc044" icon="\uf29e" block="Me"
 namespace me {
 
     //% block
-    export function helloWorld120() {
+    export function helloWorld121() {
 
     }
 
@@ -246,11 +246,11 @@ namespace me {
 
     
     
-    //% blockId=robotbit_motor_run block="Motor|%index| speed %speed"
+    //% blockId=robotbit_motor_run block="Motor %index| running with direction %direction|and speed %speed"
     //% weight=85
     //% speed.min=-255 speed.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRun(index: Motors, speed: number): void {
+    export function MotorRun(index: Motors, direction: Directions,  speed: number): void {
         if (!initialized) {
             initPCA9685()
         }
