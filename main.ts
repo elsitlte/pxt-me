@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld115() {
+    export function helloWorld116() {
 
     }
 
@@ -249,7 +249,7 @@ namespace me {
     //% weight=85
     //% speed.min=-255 speed.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRun(index: Motors, direction: Directions, speed: number): void {
+    export function MotorRun(index: Motors, speed: number): void {
         if (!initialized) {
             initPCA9685()
         }
