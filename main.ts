@@ -100,10 +100,10 @@ namespace me {
     }
     
     export enum Directions {
-        //% blockId="BACKWARD" block="0"
-        BACKWARD = 0,
-        //% blockId="FORWARD" block="1"
-        FORWARD = 1
+        //% blockId="BACK" block="0"
+        BACK = 0,
+        //% blockId="FRONT" block="1"
+        FRONT = 1
     }
     
     let initialized = false
