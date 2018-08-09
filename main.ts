@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld777() {
+    export function helloWorld888() {
 
     }
 
@@ -71,10 +71,10 @@ namespace me {
     }
 
     export enum Motors {
-        M1A = 0x1,
-        M1B = 0x2,
-        M2A = 0x3,
-        M2B = 0x4
+        MS1 = 0x1,
+        MS2 = 0x2,
+        MS3 = 0x3,
+        MS4 = 0x4
     }
 
     export enum Steppers {
