@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld125() {
+    export function helloWorld126() {
 
     }
 
@@ -100,9 +100,9 @@ namespace me {
     }
     
     export enum Directions {
-        //% blockId="backward" block="0"
+        //% blockId="Backward" block="0"
         Backward=0,
-        //% blockId="forward" block="1"
+        //% blockId="Forward" block="1"
         Forward=1
     }
     
