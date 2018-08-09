@@ -101,9 +101,9 @@ namespace me {
     
     export enum Directions {
         //% blockId="backward" block="0"
-        backward=0,
+        Backward=0,
         //% blockId="forward" block="1"
-        forward=1
+        Forward=1
     }
     
     let initialized = false
