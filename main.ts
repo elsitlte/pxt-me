@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld999() {
+    export function helloWorld111() {
 
     }
 
@@ -217,7 +217,7 @@ namespace me {
         setPwm(index + 7, 0, value)
     }
     
-    //% blockId=robotbit_stepper_degree block="Stepper 28BYJ-48|%index|degree %degree"
+    //% blockId=robotbit_stepper_degree block="Stepper|%index|degree %degree"
     //% weight=90
     export function StepperDegree(index: Steppers, degree: number): void {
         if (!initialized) {
@@ -230,7 +230,7 @@ namespace me {
     }
 
 
-    //% blockId=robotbit_stepper_turn block="Stepper 28BYJ-48|%index|turn %turn"
+    //% blockId=robotbit_stepper_turn block="Stepper|%index|turn %turn"
     //% weight=90
     export function StepperTurn(index: Steppers, turn: Turns): void {
         let degree = turn;
