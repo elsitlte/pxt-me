@@ -100,10 +100,10 @@ namespace me {
     }
     
     export enum Directions {
-        //% blockId="Backward" block="0"
-        Backward=0,
-        //% blockId="Forward" block="1"
-        Forward=1
+        //% blockId="BACKWARD" block="0"
+        BACKWARD=0,
+        //% blockId="FORWARD" block="1"
+        FORWARD=1
     }
     
     let initialized = false
@@ -244,8 +244,6 @@ namespace me {
         StepperDegree(index, degree);
     }	
 
-    
-    
     //% blockId=robotbit_motor_run block="Motor %index|running with direction %direction|and speed %speed"
     //% weight=85
     //% speed.min=-255 speed.max=255
