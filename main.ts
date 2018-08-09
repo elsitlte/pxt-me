@@ -100,9 +100,9 @@ namespace me {
     }
     
     export enum Directions {
-        //% block="0"
+        //% blockId="backward" block="0"
         backward=0,
-        //% block="1"
+        //% blockId="forward" block="1"
         forward=1
     }
     
@@ -245,11 +245,11 @@ namespace me {
     }
     
     
-    //% blockId=robotbit_motor_run block="Motor|%index|speed %speed"
+    //% blockId=robotbit_motor_run block="Motor|%index|running with direction|%direction|and speed %speed"
     //% weight=85
     //% speed.min=-255 speed.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRun(index: Motors, speed: number): void {
+    export function MotorRun(index: Motors,  direction: Directions, speed: number): void {
         if (!initialized) {
             initPCA9685()
         }
