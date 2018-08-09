@@ -1,8 +1,8 @@
 {
-	"me.Servo|block": "¶æ»ú|%index|½Ç¶È %degree",
-	"me.StepperDegree|block": "²½½ø 28BYJ-48|%index|½Ç¶È %degree",
-	"me.StepperTurn|block": "²½½ø 28BYJ-48|%index|È¦Êı %turn",
-	"me.MotorRun|block": "µç»ú|%index|ËÙ¶È %speed",
-	"me.MotorStop|block": "µç»ú Í£Ö¹|%index|",
-	"me.MotorStopAll|block": "Í£Ö¹ËùÓĞµç»ú",
+	"robotbit.Servo|block": "èˆµæœº|%index|è§’åº¦ %degree",
+	"robotbit.StepperDegree|block": "æ­¥è¿› 28BYJ-48|%index|è§’åº¦ %degree",
+	"robotbit.StepperTurn|block": "æ­¥è¿› 28BYJ-48|%index|åœˆæ•° %turn",
+	"robotbit.MotorRun|block": "ç”µæœº|%index|é€Ÿåº¦ %speed",
+	"robotbit.MotorStop|block": "ç”µæœº åœæ­¢|%index|",
+	"robotbit.MotorStopAll|block": "åœæ­¢æ‰€æœ‰ç”µæœº",
 }
