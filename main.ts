@@ -17,7 +17,7 @@
 namespace me {
 
     //% block
-    export function helloWorld119() {
+    export function helloWorld120() {
 
     }
 
@@ -242,10 +242,11 @@ namespace me {
     export function StepperTurn(index: Steppers, turn: Turns): void {
         let degree = turn;
         StepperDegree(index, degree);
-    }
+    }	
+
     
     
-    //% blockId=robotbit_motor_run block="Motor|%index|running with direction|%direction|and speed %speed"
+    //% blockId=robotbit_motor_run block="Motor|%index| speed %speed"
     //% weight=85
     //% speed.min=-255 speed.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
