@@ -210,7 +210,7 @@ namespace me {
      * @param index Servo Channel; eg: S1
      * @param degree [0-180] degree of servo; eg: 0, 90, 180
     */
-    //% blockId=robotbit_servo block="Servo|%index|degree %degree"
+    //% blockId=robotbit_servo block="Servo %index|degree %degree"
     //% weight=100
     //% degree.min=0 degree.max=180
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -224,7 +224,7 @@ namespace me {
         setPwm(index + 7, 0, value)
     }
     
-    //% blockId=robotbit_stepper_degree block="Stepper|%index|degree %degree"
+    //% blockId=robotbit_stepper_degree block="Stepper %index|degree %degree"
     //% weight=90
     export function StepperDegree(index: Steppers, degree: number): void {
         if (!initialized) {
@@ -237,14 +237,14 @@ namespace me {
     }
 
 
-    //% blockId=robotbit_stepper_turn block="Stepper|%index|turn %turn"
+    //% blockId=robotbit_stepper_turn block="Stepper %index|turn %turn"
     //% weight=90
     export function StepperTurn(index: Steppers, turn: Turns): void {
         let degree = turn;
         StepperDegree(index, degree);
     }    
 
-    //% blockId=robotbit_motor_run block="Motor|%index|speed %speed"
+    //% blockId=robotbit_motor_run block="Motor %index|speed %speed"
     //% weight=85
     //% speed.min=-255 speed.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -273,7 +273,7 @@ namespace me {
     }
 
 
-    //% blockId=robotbit_stop block="Motor Stop|%index|"
+    //% blockId=robotbit_stop block="Motor Stop %index"
     //% weight=80
     export function MotorStop(index: Motors): void {
         MotorRun(index, 0);
