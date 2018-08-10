@@ -24,3 +24,7 @@
 ## Supported targets
 
 * for PXT/microbit
+
+```package
+me=github:elsitlte/pxt-me
+```
