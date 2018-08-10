@@ -1,0 +1,19 @@
+{
+  "me.MotorRun|block": "Motor %index|speed %speed",
+  "me.MotorStopAll|block": "Motor Stop All",
+  "me.MotorStop|block": "Motor Stop %index|",
+  "me.Servo|block": "Servo %index|degree %degree",
+  "me.StepperDegree|block": "Stepper %index|degree %degree",
+  "me.StepperTurn|block": "Stepper %index|turn %turn",
+  "me.Steppers.Step_1|block": "Step 1",
+  "me.Steppers.Step_2|block": "Step 2",
+  "me.Turns.T1B0|block": "1",
+  "me.Turns.T1B2|block": "1/2",
+  "me.Turns.T1B4|block": "1/4",
+  "me.Turns.T2B0|block": "2",
+  "me.Turns.T3B0|block": "3",
+  "me.Turns.T4B0|block": "4",
+  "me.Turns.T5B0|block": "5",
+  "me|block": "Me",
+  "{id:category}Me": "Me"
+}

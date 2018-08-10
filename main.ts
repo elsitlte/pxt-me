@@ -13,11 +13,11 @@
  * The most important macro "block" specifies that a
  * block should be generated for a **exported** function.
  */
-//% color="#AAc044" icon="\uf29e" block="Me"
+//% color="#AAc044" icon="\uf135" block="Me"
 namespace me {
 
     //% block
-    export function helloWorldme1024() {
+    export function helloWorldcc() {
 
     }
 
@@ -78,7 +78,9 @@ namespace me {
     }
 
     export enum Steppers {
+        //% blockId="Step_1" block="Step 1"
         Step_1 = 0x1,
+        //% blockId="Step_2" block="Step 2"
         Step_2 = 0x2
     }
 
@@ -240,7 +242,7 @@ namespace me {
     export function StepperTurn(index: Steppers, turn: Turns): void {
         let degree = turn;
         StepperDegree(index, degree);
-    }	
+    }    
 
     //% blockId=robotbit_motor_run block="Motor|%index|speed %speed"
     //% weight=85
