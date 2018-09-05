@@ -276,7 +276,7 @@ namespace magibit {
     }
 
     wait_ms(ms:number) {
-      control.waitMicros(ms);
+      basic.pause(ms);
     }
 
     dhtStart() {
@@ -408,7 +408,7 @@ namespace magibit {
    * @return number returns analog value from 0 to 1023
    */
   //% blockId=magibit_sensor_air_humidity_read
-  //% block="🌡Read air humidity(\%) at %pin|"
+  //% block="🌡Read air humidity at %pin|"
   //% blockGap=16
   //% weight=75
   export function airHumidityReadValue(pin: AirSensorPins): number {

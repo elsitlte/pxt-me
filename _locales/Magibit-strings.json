@@ -7,7 +7,7 @@
   "magibit.soilSensorReadValue|block": "💧Soil moisture read analog at |%pin|",
   "magibit.soundSensorReadValue|block": "🔊Sound read analog at |%pin|",
   "magibit.altrasonicReadValue|block": "📡Ultrasonic read distance(cm) at %pin|",
-  "magibit.airHumidityReadValue|block": "🌡Read air humidity(%) at %pin|",
+  "magibit.airHumidityReadValue|block": "🌡Read air humidity at %pin|",
   "magibit.airTemperatureReadValue|block": "🌡Read air temperature(°C) at %pin|",
   "magibit.joystickReadButtonStateValue|block": "🕹Joystick |%joystick| is pressed",
   "magibit.joystickReadXValue|block": "🕹Position of joystick, x-axis |%joystick|",
