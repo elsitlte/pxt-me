@@ -234,7 +234,7 @@ namespace magibit {
       this.bt;
       this.currentTem = -99;
       this.Temperature;
-      this.Humidity
+      this.Humidity;
       this.count;
     }
 
@@ -395,10 +395,10 @@ namespace magibit {
 
     getHumidity():number {
       if (this.currentTem === -99){
-        this.dhtGetHt();
+        //this.dhtGetHt();
         this.currentTem = this.Temperature;
       }
-      return this.Humidity;
+      return 1;
     }
   }
 
