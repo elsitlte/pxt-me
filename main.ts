@@ -1,291 +1,785 @@
-
 /**
- * Use this file to define custom functions and blocks.
- * Read more at https://makecode.microbit.org/blocks/custom
+ * support for magibit
  */
+//% weight=10 icon="\uf0ad" color=#FF7D0A block="Magibit"
+namespace magibit {
+  /**
+   * 定义项目中使用的内部数据类型
+   */
+  export enum InnerNumberType {
+    ANALOG,
+    DIGITAL
+  }
 
-/**
- * Custom blocks
- */
-/**
- * Functions are mapped to blocks using various macros 
- * in comments starting with % (e.g., //% block).
- * The most important macro "block" specifies that a
- * block should be generated for a **exported** function.
- */
-//% color="#AAc044" icon="\uf135" block="Me"
-namespace me {
+  export enum Motor {
+    M1,
+    M2
+  }
 
-    //% block
-    export function helloWorldcc() {
+  export enum MotorDirection {
+    //% blockId="Forward" block="0"
+    Forward,
+    //% blockId="Backward" block="1"
+    Backward
+  }
 
+  export enum LEDPin {
+    P0,
+    P1,
+    P2,
+    P13,
+    P16
+  }
+
+  export enum LEDState {
+    ON,
+    OFF
+  }
+
+  export enum LightSensorPins {
+    P0,
+    P1,
+    P2
+  }
+
+  export enum SoundSensorPins {
+    P0,
+    P1,
+    P2
+  }
+
+  export enum SoilSensorPins {
+    P0,
+    P1,
+    P2
+  }
+
+  export enum InfraredSensorPins {
+    P0,
+    P1,
+    P2,
+    P13,
+    P16
+  }
+
+  export enum UltrasonicSensorPins {
+    P0,
+    P1,
+    P2
+  }
+
+  export enum SampleTimes {
+    //% blockId="OneTime" block="OneTime"
+    OneTime=1,
+    //% blockId="ThreeTimes" block="ThreeTimes"
+    ThreeTimes=3,
+    //% blockId="SevenTimes" block="SevenTimes"
+    SevenTimes=7
+  } 
+
+  export enum AirSensorPins {
+    P0,
+    P1,
+    P2
+  }
+
+  export enum PotentiometerSensorPins {
+    P0,
+    P1,
+    P2
+  }
+
+  export enum Joystick {
+    A1,
+    A2
+  }
+
+  /**
+   * read light sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_light_read
+  //% block="🔆Light level read analog at |%pin|"
+  //% blockGap=16
+  //% weight=80
+  export function lightSensorReadValue(pin: LightSensorPins): number {
+    switch (pin) {
+      case LightSensorPins.P0:
+        return pins.analogReadPin(AnalogPin.P0);
+      case LightSensorPins.P1:
+        return pins.analogReadPin(AnalogPin.P1);
+      case LightSensorPins.P2:
+        return pins.analogReadPin(AnalogPin.P2);
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * read sound sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_sound_read
+  //% block="🔊Sound read analog at |%pin|"
+  //% blockGap=16
+  //% weight=79
+  export function soundSensorReadValue(pin: SoundSensorPins): number {
+    switch (pin) {
+      case SoundSensorPins.P0:
+        return pins.analogReadPin(AnalogPin.P0);
+      case SoundSensorPins.P1:
+        return pins.analogReadPin(AnalogPin.P1);
+      case SoundSensorPins.P2:
+        return pins.analogReadPin(AnalogPin.P2);
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * read soil sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_soil_read
+  //% block="💧Soil moisture read analog at |%pin|"
+  //% blockGap=16
+  //% weight=78
+  export function soilSensorReadValue(pin: SoilSensorPins): number {
+    switch (pin) {
+      case SoilSensorPins.P0:
+        return pins.analogReadPin(AnalogPin.P0);
+      case SoilSensorPins.P1:
+        return pins.analogReadPin(AnalogPin.P1);
+      case SoilSensorPins.P2:
+        return pins.analogReadPin(AnalogPin.P2);
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * read infrared sensor's value
+   * @param pin sensor's active pin
+   * @return number returns digital value from 0 to 1
+   */
+  //% blockId=magibit_sensor_infrared_read
+  //% block="👀infrared read digital at |%pin|"
+  //% blockGap=16
+  //% weight=77
+  export function infraredSensorReadValue(pin: InfraredSensorPins): number {
+    switch (pin) {
+      case InfraredSensorPins.P0:
+        pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P0);
+      case InfraredSensorPins.P1:
+        pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P1);
+      case InfraredSensorPins.P2:
+        pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P2);
+      case InfraredSensorPins.P13:
+        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P13);
+      case InfraredSensorPins.P16:
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P16);
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * read motor speed sensor's value
+   * @param pin sensor's active pin
+   * @return number returns digital value from 0 to 1
+   */
+  //% blockId=magibit_sensor_motor_speed_read
+  //% block="⏱Motor speed read digital at |%pin|"
+  //% blockGap=16
+  //% weight=76
+  export function motorSpeedSensorReadValue(pin: InfraredSensorPins): number {
+    switch (pin) {
+      case InfraredSensorPins.P0:
+        pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P0);
+      case InfraredSensorPins.P1:
+        pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P1);
+      case InfraredSensorPins.P2:
+        pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P2);
+      case InfraredSensorPins.P13:
+        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P13);
+      case InfraredSensorPins.P16:
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P16);
+      default:
+        return 0;
+    }
+  }
+
+  class DHT {
+    pin:AirSensorPins;
+    bt:number;
+    currentTem:number;
+    Temperature:number;
+    Humidity:number;
+    count:number;
+    constructor(pin: AirSensorPins){
+      this.pin = pin;
+      this.bt;
+      this.currentTem = -99;
+      this.Temperature;
+      this.Humidity
+      this.count;
     }
 
-    const PCA9685_ADDRESS = 0x40
-    const MODE1 = 0x00
-    const MODE2 = 0x01
-    const SUBADR1 = 0x02
-    const SUBADR2 = 0x03
-    const SUBADR3 = 0x04
-    const PRESCALE = 0xFE
-    const LED0_ON_L = 0x06
-    const LED0_ON_H = 0x07
-    const LED0_OFF_L = 0x08
-    const LED0_OFF_H = 0x09
-    const ALL_LED_ON_L = 0xFA
-    const ALL_LED_ON_H = 0xFB
-    const ALL_LED_OFF_L = 0xFC
-    const ALL_LED_OFF_H = 0xFD
-
-    const STP_CHA_L = 2047
-    const STP_CHA_H = 4095
-
-    const STP_CHB_L = 1
-    const STP_CHB_H = 2047
-
-    const STP_CHC_L = 1023
-    const STP_CHC_H = 3071
-
-    const STP_CHD_L = 3071
-    const STP_CHD_H = 1023
-
-    // HT16K33 commands
-    const HT16K33_ADDRESS = 0x70
-    const HT16K33_BLINK_CMD = 0x80
-    const HT16K33_BLINK_DISPLAYON = 0x01
-    const HT16K33_BLINK_OFF = 0
-    const HT16K33_BLINK_2HZ = 1
-    const HT16K33_BLINK_1HZ = 2
-    const HT16K33_BLINK_HALFHZ = 3
-    const HT16K33_CMD_BRIGHTNESS = 0xE0
-
-    export enum Servos {
-        S1 = 0x01,
-        S2 = 0x02,
-        S3 = 0x03,
-        S4 = 0x04,
-        S5 = 0x05,
-        S6 = 0x06,
-        S7 = 0x07,
-        S8 = 0x08
+    dhtGet (): number {
+      switch (this.pin) {
+        case AirSensorPins.P0:
+          pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
+          return pins.digitalReadPin(DigitalPin.P0);
+        case AirSensorPins.P1:
+          pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
+          return pins.digitalReadPin(DigitalPin.P1);
+        case AirSensorPins.P2:
+          pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
+          return pins.digitalReadPin(DigitalPin.P2);
+        default:
+          return 0;
+      }
     }
 
-    export enum Motors {
-        MS1 = 0x1,
-        MS2 = 0x2,
-        MS3 = 0x3,
-        MS4 = 0x4
+    dhtSet (level:number) {
+      switch (this.pin) {
+        case AirSensorPins.P0:
+          pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
+          pins.digitalWritePin(DigitalPin.P0 ,level);
+          break;
+        case AirSensorPins.P1:
+          pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
+          pins.digitalWritePin(DigitalPin.P1 ,level);
+          break;
+        case AirSensorPins.P2:
+          pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
+          pins.digitalWritePin(DigitalPin.P2 ,level);
+          break;
+      }
     }
 
-    export enum Steppers {
-        //% blockId="Step_1" block="Step 1"
-        Step_1 = 0x1,
-        //% blockId="Step_2" block="Step 2"
-        Step_2 = 0x2
+    delay_us(us:number) {
+      control.waitMicros(us);
     }
 
-    export enum Turns {
-        //% blockId="T1B4" block="1/4"
-        T1B4 = 90,
-        //% blockId="T1B2" block="1/2"
-        T1B2 = 180,
-        //% blockId="T1B0" block="1"
-        T1B0 = 360,
-        //% blockId="T2B0" block="2"
-        T2B0 = 720,
-        //% blockId="T3B0" block="3"
-        T3B0 = 1080,
-        //% blockId="T4B0" block="4"
-        T4B0 = 1440,
-        //% blockId="T5B0" block="5"
-        T5B0 = 1800
-    }
-    
-    export enum Directions {
-       Forward,
-       Backward        
-    }
-    
-    let initialized = false
-    let initializedMatrix = false
-
-    let matBuf = pins.createBuffer(17);
-    let distanceBuf = 0;
-
-    function i2cwrite(addr: number, reg: number, value: number) {
-        let buf = pins.createBuffer(2)
-        buf[0] = reg
-        buf[1] = value
-        pins.i2cWriteBuffer(addr, buf)
+    wait_ms(ms:number) {
+      control.waitMicros(ms);
     }
 
-    function i2ccmd(addr: number, value: number) {
-        let buf = pins.createBuffer(1)
-        buf[0] = value
-        pins.i2cWriteBuffer(addr, buf)
+    dhtStart() {
+      this.dhtSet(1);
+      this.delay_us(60);
+      this.dhtSet(0);
+      this.wait_ms(25);
+      this.dhtSet(1);
     }
 
-    function i2cread(addr: number, reg: number) {
-        pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
-        let val = pins.i2cReadNumber(addr, NumberFormat.UInt8BE);
-        return val;
+    dhtReadAck() {
+      if(this.whileGet(1) === 1)
+        return 1;
+      if(this.whileGet(0) === 1)
+        return 1;
+      if(this.whileGet(1) === 1)
+        return 1;
+
+      return 0;
     }
 
-    function initPCA9685(): void {
-        i2cwrite(PCA9685_ADDRESS, MODE1, 0x00)
-        setFreq(50);
-        for (let idx = 0; idx < 16; idx++) {
-            setPwm(idx, 0 ,0);
+    whileGet(value:number):number {
+      let time_out:number = 0;
+      let TIME_TH:number = 10000;
+      while((value === this.dhtGet()) && (time_out < TIME_TH)) {
+        time_out ++;
+      }
+
+      if(time_out === TIME_TH)
+        return 1;
+      else
+        return 0;
+    }
+
+    dhtReadOneBit() {
+      this.whileGet(0);
+      this.delay_us(60);
+      this.bt <<= 1;
+      if(1===this.dhtGet()){
+        this.bt |= 1;
+        this.whileGet(1);
+      }
+      else
+        this.bt |= 0;
+    }
+
+    dhtReadOneByte() {
+      this.bt = 0;
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+    }
+
+    // systemTick() {
+    //   let temp = 0;
+    //   this.count ++;
+
+    //   if (this.count === 200){
+    //     this.dhtGetHt();
+    //     if (this.currentTem === -99){
+    //       this.currentTem = this.Temperature;
+    //     }
+
+    //     if((this.Temperature - this.currentTem === 1) || (this.currentTem - this.Temperature === 1)){
+    //       this.currentTem = temp;
+    //       //MicroBitEvent(this->baseId + this->id, MINODE_DHT_EVT_CHANGE);
+    //     }
+    //     this.count = 0;
+    //   }
+
+    // }
+
+    dhtGetHt():number {
+      let CHECKSUM = 0;
+      let R_H = 0;
+      let R_L = 0;
+      let T_H = 0;
+      let T_L = 0;
+
+      this.dhtStart();
+      if(this.dhtReadAck() === 1)
+        return 0;
+
+      this.dhtReadOneByte();
+      R_H = this.bt;
+      this.dhtReadOneByte();
+      R_L = this.bt;
+      this.dhtReadOneByte();
+      T_H = this.bt;
+      this.dhtReadOneByte();
+      T_L = this.bt;
+      this.dhtReadOneByte();
+      CHECKSUM = this.bt;
+
+      if(CHECKSUM === R_H+R_L+T_H+T_L){
+        this.Humidity = R_H;
+        this.Temperature = T_H;
+        return 0;
+      }
+      else
+        return 1;
+    }
+
+    getTemperature():number {
+      if (this.currentTem === -99){
+        this.dhtGetHt();
+        this.currentTem = this.Temperature;
+      }
+      return this.Temperature;
+    }
+
+    getHumidity():number {
+      if (this.currentTem === -99){
+        this.dhtGetHt();
+        this.currentTem = this.Temperature;
+      }
+      return this.Humidity;
+    }
+  }
+
+  /**
+   * read air humidity sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_air_humidity_read
+  //% block="🌡Read air humidity(\%) at %pin|"
+  //% blockGap=16
+  //% weight=75
+  export function airHumidityReadValue(pin: AirSensorPins): number {
+    let tmpVal = 0;
+    let dht = new DHT(pin);
+    switch (pin) {
+      case AirSensorPins.P0: {
+        tmpVal = dht.getHumidity();
+        break;
+      }
+      case AirSensorPins.P1: {
+        tmpVal = dht.getHumidity();
+        break;
+      }
+      case AirSensorPins.P2: {
+        tmpVal = dht.getHumidity();
+        break;
+      }
+    }
+    return tmpVal;
+  }
+
+  /**
+   * read air Temperature sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_air_Temperature_read
+  //% block="🌡Read air Temperature(°C) at %pin|"
+  //% blockGap=16
+  //% weight=74
+  export function airTemperatureReadValue(pin: AirSensorPins): number {
+    let tmpVal = 0;
+    let dht = new DHT(pin);
+    switch (pin) {
+      case AirSensorPins.P0: {
+        tmpVal = dht.getTemperature();
+        break;
+      }
+      case AirSensorPins.P1: {
+        tmpVal = dht.getTemperature();
+        break;
+      }
+      case AirSensorPins.P2: {
+        tmpVal = dht.getTemperature();
+        break;
+      }
+    }
+    return tmpVal;
+  }
+
+  /**
+   * read Ultrasonic sensor's value
+   * @param pin sensor's active pin
+   * @return number returns ultrasonic range from 4-50cm. 
+   */
+  //% blockId=ultrasonic_sensor_range_read
+  //% block="📡Ultrasonic read distance(cm) at %pin| "
+  //% blockGap=16
+  //% weight=73
+  export function ultrasonicReadValue(pin: UltrasonicSensorPins ): number {
+    let time_end: number = 0 ;
+    let time_begin: number = 0 ;
+    let distance: number = 0 ;
+    let times=1;
+    let totData: number = 0 ;
+    let avrData: number=0;
+
+    let digPin: number ;
+    switch (pin) {
+      case UltrasonicSensorPins.P0:
+        digPin=DigitalPin.P0;
+        break;
+      case UltrasonicSensorPins.P1:
+        digPin=DigitalPin.P1;
+        break;
+      case UltrasonicSensorPins.P2:
+        digPin=DigitalPin.P2;
+        break;
+    }
+
+    // 获取超声波模块，上一个周期中高电平的时间
+    function getTimestemp() {
+        let timestemp = 0;
+        let time_end = 0 ;
+        let time_begin = 0 ;
+        while (pins.digitalReadPin(digPin) == 0) {
+          
         }
-        initialized = true
+        time_begin = input.runningTimeMicros() ;
+        while (pins.digitalReadPin(digPin) == 1 && timestemp < 60000) {
+            time_end = input.runningTimeMicros() ;            
+        }
+        timestemp = time_end - time_begin ;
+        return timestemp;
     }
-
-    function setFreq(freq: number): void {
-        // Constrain the frequency
-        let prescaleval = 25000000;
-        prescaleval /= 4096;
-        prescaleval /= freq;
-        prescaleval -= 1;
-        let prescale = prescaleval; //Math.Floor(prescaleval + 0.5);
-        let oldmode = i2cread(PCA9685_ADDRESS, MODE1);
-        let newmode = (oldmode & 0x7F) | 0x10; // sleep
-        i2cwrite(PCA9685_ADDRESS, MODE1, newmode); // go to sleep
-        i2cwrite(PCA9685_ADDRESS, PRESCALE, prescale); // set the prescaler
-        i2cwrite(PCA9685_ADDRESS, MODE1, oldmode);
-        control.waitMicros(5000);
-        i2cwrite(PCA9685_ADDRESS, MODE1, oldmode | 0xa1);
+    for (let i=0;i<times;i++){
+      totData+=getTimestemp();
     }
+    avrData=totData/times;
 
-    function setPwm(channel: number, on: number, off: number): void {
-        if (channel < 0 || channel > 15)
-            return;
+    const table1: number[]=[200,200,200,200,200,
+                          200,200,200,200,200,
+                          200,200,200,200,200,
+                          200,200,200,200,200,
+                          200,200,200,200,207
+                          ];
 
-        let buf = pins.createBuffer(5);
-        buf[0] = LED0_ON_L + 4 * channel;
-        buf[1] = on & 0xff;
-        buf[2] = (on >> 8) & 0xff;
-        buf[3] = off & 0xff;
-        buf[4] = (off >> 8) & 0xff;
-        pins.i2cWriteBuffer(PCA9685_ADDRESS, buf);
+    const table2: number[]=[236,241,247,265,280,
+                          290,294,298,301,304,
+                          306,323,324,325,325,
+                          325,325,325,325,325,
+                          325,335,345,353,357
+                          ];
+
+    const table3: number[]=[360,365,366,368,370,
+                          372,374,376,378,380,
+                          381,382,384,386,387,
+                          387,387,388,388,388,
+                          389,389,390,390,391
+                          ];
+
+    const table4: number[]=[392,393,393,394,394,
+                          395,395,396,396,397,
+                          397,398,398,399,400,
+                          401,402,403,404,405,
+                          406,407,408,409,409
+                          ];
+
+    const table5: number[]=[410,410,411,411,412,
+                          412,413,413,414,414,
+                          415,415,416,416,417,
+                          417,418,419,420,420,
+                          420,421,421,421,421
+                          ];
+    //20 per step
+    const table6: number[]=[422,422,422,422,423,
+                          423,423,423,424,424,
+                          424,424,425,425,425,
+                          425,426,426,426,426,
+                          427,427,427,427,427
+                          ];
+    let table: number[];
+    let tableIndex: number = avrData/20;
+    if (tableIndex<25&&tableIndex>0) {
+      table= table1;
+    } 
+    if(tableIndex<50&&tableIndex>=25) {
+      table= table2;
     }
+    if(tableIndex<75&&tableIndex>=50) {
+      table= table3;
+    } 
+    if(tableIndex<100&&tableIndex>=75) {
+      table= table4;
+    } 
+    if(tableIndex<125&&tableIndex>=100) {
+      table= table5;
+    } 
+    if(tableIndex>=125) {
+      table= table6;
+    } 
+   
+    let tableCnt: number = Math.round(tableIndex%25);
+    let velocity: number = table[tableCnt];
+
+     //转换成厘米
+    distance = velocity *  avrData / 20000 ;
+      return distance;
+
+  }
 
 
-    function setStepper(index: number, dir: boolean): void {
-        if (index == 1) {
-            if (dir) {
-                setPwm(0, STP_CHA_L, STP_CHA_H);
-                setPwm(2, STP_CHB_L, STP_CHB_H);
-                setPwm(1, STP_CHC_L, STP_CHC_H);
-                setPwm(3, STP_CHD_L, STP_CHD_H);
-            } else {
-                setPwm(3, STP_CHA_L, STP_CHA_H);
-                setPwm(1, STP_CHB_L, STP_CHB_H);
-                setPwm(2, STP_CHC_L, STP_CHC_H);
-                setPwm(0, STP_CHD_L, STP_CHD_H);
-            }
+  /**
+   * read joystick sensor's x value
+   * @param joystick selected joystick sensor
+   * @return number returns analog value from 0 to 1000
+   */
+  //% blockId=magibit_sensor_joystick_x_read
+  //% block="🕹Position of joystick, x-axis |%joystick|"
+  //% blockGap=8
+  //% weight=72
+  export function joystickReadXValue(joystick: Joystick): number {
+    switch (joystick) {
+      case Joystick.A1:
+        return pins.analogReadPin(AnalogPin.P1);
+      case Joystick.A2:
+        return pins.analogReadPin(AnalogPin.P0);
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * read joystick sensor's y value
+   * @param joystick selected joystick sensor
+   * @return number returns analog value from 0 to 1000
+   */
+  //% blockId=magibit_sensor_joystick_y_read
+  //% block="🕹Position of joystick, y-axis |%joystick|"
+  //% blockGap=8
+  //% weight=71
+  export function joystickReadYValue(joystick: Joystick): number {
+    switch (joystick) {
+      case Joystick.A1:
+        return pins.analogReadPin(AnalogPin.P2);
+      case Joystick.A2:
+        return pins.analogReadPin(AnalogPin.P1);
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * read joystick sensor's button state value
+   * @param joystick selected joystick sensor
+   * @return number returns digital value from 0 to 1
+   */
+  //% blockId=magibit_sensor_joystick_button_state_read
+  //% block="🕹Joystick |%joystick| is pressed"
+  //% blockGap=16
+  //% weight=70
+  export function joystickReadButtonStateValue(joystick: Joystick): boolean {
+    let tmpVal = 0;
+    let tmpP0Val = pins.analogReadPin(AnalogPin.P0);
+    let tmpP1Val = pins.analogReadPin(AnalogPin.P1);
+    let tmpP2Val = pins.analogReadPin(AnalogPin.P2);
+    switch (joystick) {
+      case Joystick.A1:
+        tmpVal = tmpP1Val > tmpP2Val ? tmpP1Val : tmpP2Val;
+        break;
+      case Joystick.A2:
+        tmpVal = tmpP0Val > tmpP1Val ? tmpP0Val : tmpP1Val;
+        break;
+    }
+    return tmpVal > 1000;
+  }
+
+  /**
+   * read potentiometer sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_potentiometer_read
+  //% block="🎚Potentiometer read analog at |%pin|"
+  //% blockGap=16
+  //% weight=69
+  export function potentiometerReadValue(pin: PotentiometerSensorPins): number {
+    switch (pin) {
+      case PotentiometerSensorPins.P0:
+        return pins.analogReadPin(AnalogPin.P0);
+      case PotentiometerSensorPins.P1:
+        return pins.analogReadPin(AnalogPin.P1);
+      case PotentiometerSensorPins.P2:
+        return pins.analogReadPin(AnalogPin.P2);
+      default:
+        return 0;
+    }
+  }
+
+
+  /**
+   * change motor's speed and direction
+   */
+  //% blockId=magibit_actuator_motor_set_speed
+  //% block="Motor |%motor| running with direction |%direction| and speed |%speed|"
+  //% weight=68
+  //% blockGap=8
+  //% speed.min=0 speed.max=1023
+  export function motorSetSpeed(motor: Motor, direction: MotorDirection, speed: number): void {
+
+    let speedVal = filterInnerTypeNumber(InnerNumberType.ANALOG, speed);
+
+    if (motor == Motor.M1) {
+      pins.digitalWritePin(DigitalPin.P8, direction);
+      pins.analogWritePin(AnalogPin.P12, speedVal);
+    } else if (motor == Motor.M2) {
+      pins.digitalWritePin(DigitalPin.P14, direction);
+      pins.analogWritePin(AnalogPin.P15, speedVal)
+    }
+  }
+
+  /**
+   * stop all motor
+   */
+  //% blockId=magibit_actuator_motor_stop_all
+  //% block="Motor stop all"
+  //% blockGap=16
+  //% weight=67
+  export function motorStopAll(): void {
+    motorSetSpeed(Motor.M1, MotorDirection.Forward, 0);
+    motorSetSpeed(Motor.M2, MotorDirection.Forward, 0);
+  }
+
+
+  /**
+   * set LED'S brightness
+   */
+  //% blockId=magibit_actuator_led_set_brightness
+  //% block="💡LED |%pin| set brightness |%brightness|"
+  //% weight=66
+  //% blockGap=8
+  //% brightness.min=0 brightness.max=1023
+  export function ledSetBrightness(pin: LEDPin, brightness: number): void {
+
+    let brightnessVal = filterInnerTypeNumber(InnerNumberType.ANALOG, brightness);
+
+    switch (pin) {
+      case LEDPin.P0:
+        pins.analogWritePin(AnalogPin.P0, brightnessVal);
+        break;
+      case LEDPin.P1:
+        pins.analogWritePin(AnalogPin.P1, brightnessVal);
+        break;
+      case LEDPin.P2:
+        pins.analogWritePin(AnalogPin.P2, brightnessVal);
+        break;
+      case LEDPin.P13:
+        pins.analogWritePin(AnalogPin.P13, brightnessVal);
+        break;
+      case LEDPin.P16:
+        pins.analogWritePin(AnalogPin.P16, brightnessVal);
+        break;
+    }
+  }
+
+  /**
+   * turn LED on or off
+   */
+  //% blockId=magibit_actuator_led_on_off
+  //% block="💡LED |%pin| |%state|"
+  //% blockGap=8
+  //% weight=65
+  export function ledSetOnOff(pin: LEDPin, state: LEDState): void {
+    switch (state) {
+      case LEDState.ON:
+        ledSetBrightness(pin, 1023);
+        break;
+      case LEDState.OFF:
+        ledSetBrightness(pin, 0);
+        break;
+      default:
+        ledSetBrightness(pin, 0);
+    }
+  }
+
+  /**
+   * 项目内部的数据类型非法制过滤
+   * @param {InnerNumberType} innerType
+   * @param {number} analogNumber
+   * @returns {number}
+   */
+  export function filterInnerTypeNumber(innerType: InnerNumberType, analogNumber: number): number {
+    switch (innerType) {
+      case InnerNumberType.ANALOG: {
+        if (analogNumber < 0 || analogNumber == null) {
+          return 0;
+        } else if (analogNumber > 1023) {
+          return 1023;
         } else {
-            if (dir) {
-                setPwm(4, STP_CHA_L, STP_CHA_H);
-                setPwm(6, STP_CHB_L, STP_CHB_H);
-                setPwm(5, STP_CHC_L, STP_CHC_H);
-                setPwm(7, STP_CHD_L, STP_CHD_H);
-            } else {
-                setPwm(7, STP_CHA_L, STP_CHA_H);
-                setPwm(5, STP_CHB_L, STP_CHB_H);
-                setPwm(6, STP_CHC_L, STP_CHC_H);
-                setPwm(4, STP_CHD_L, STP_CHD_H);
-            }
+          return analogNumber;
         }
-    }
-
-    function stopMotor(index: number) {
-        setPwm((index - 1) * 2, 0, 0);
-        setPwm((index - 1) * 2 + 1, 0, 0);
-    }
-
-
-
-    /**
-     * Servo Execute
-     * @param index Servo Channel; eg: S1
-     * @param degree [0-180] degree of servo; eg: 0, 90, 180
-    */
-    //% blockId=robotbit_servo block="Servo %index|degree %degree"
-    //% weight=100
-    //% degree.min=0 degree.max=180
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Servo(index: Servos, degree: number): void {
-        if (!initialized) {
-            initPCA9685()
-        }
-        // 50hz: 20,000 us
-        let v_us = (degree * 1800 / 180 + 600) // 0.6 ~ 2.4
-        let value = v_us * 4096 / 20000
-        setPwm(index + 7, 0, value)
-    }
-    
-    //% blockId=robotbit_stepper_degree block="Stepper %index|degree %degree"
-    //% weight=90
-    export function StepperDegree(index: Steppers, degree: number): void {
-        if (!initialized) {
-            initPCA9685()
-        }
-        setStepper(index, degree > 0);
-        degree = Math.abs(degree);
-        basic.pause(10240 * degree / 360);
-        MotorStopAll()
-    }
-
-
-    //% blockId=robotbit_stepper_turn block="Stepper %index|turn %turn"
-    //% weight=90
-    export function StepperTurn(index: Steppers, turn: Turns): void {
-        let degree = turn;
-        StepperDegree(index, degree);
-    }    
-
-    //% blockId=robotbit_motor_run block="Motor %index|speed %speed"
-    //% weight=85
-    //% speed.min=-255 speed.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRun(index: Motors, speed: number): void {
-        if (!initialized) {
-            initPCA9685()
-        }
-        speed = speed * 16; // map 255 to 4096
-        if (speed >= 4096) {
-            speed = 4095
-        }
-        if (speed <= -4096) {
-            speed = -4095
-        }
-        if (index > 4 || index <= 0)
-            return
-        let pp = (index - 1) * 2
-        let pn = (index - 1) * 2 + 1
-        if (speed >= 0) {
-            setPwm(pp, 0, speed)
-            setPwm(pn, 0, 0)
+      }
+      case InnerNumberType.DIGITAL: {
+        if (analogNumber < 0 || analogNumber == null) {
+          return 0;
         } else {
-            setPwm(pp, 0, 0)
-            setPwm(pn, 0, -speed)
+          return analogNumber;
         }
+      }
     }
-
-
-    //% blockId=robotbit_stop block="Motor Stop %index"
-    //% weight=80
-    export function MotorStop(index: Motors): void {
-        MotorRun(index, 0);
-    }
-
-    //% blockId=robotbit_stop_all block="Motor Stop All"
-    //% weight=79
-    //% blockGap=50
-    export function MotorStopAll(): void {
-        for (let idx = 1; idx <= 4; idx++) {
-            stopMotor(idx);
-        }
-    }
-
+    return 0;
+  }
 }

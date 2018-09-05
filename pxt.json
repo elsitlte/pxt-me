@@ -1,7 +1,7 @@
 {
-    "name": "me",
-    "version": "18.810.1733",
-    "description": "me magiSuperDriver package for Micro:bit",
+    "name": "Magibit",
+    "version": "18905.1410",
+    "description": "Magibit package for Micro:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*"
@@ -9,7 +9,8 @@
     "files": [
         "README.md",
         "main.ts",
-        "_locales/zh/me-strings.json"
+        "_locales/zh/Magibit-strings.json",
+        "_locales/zh/Magibit-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"
