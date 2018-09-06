@@ -298,9 +298,10 @@ namespace magibit {
       //let TIME_TH:number = 10000;
       //let time_start = +new Date();
       while(value === this.dhtGet()) {
-        time_out++
+        time_out++;
       };
       this.Humidity=time_out;
+      this.Temperature=time_out;
     }
 
     dhtReadOneBit() {
@@ -354,8 +355,8 @@ namespace magibit {
       let T_L = 0;
 
       this.dhtStart();
-      if(this.dhtReadAck() === 1)
-        return 0;
+      // if(this.dhtReadAck() === 1)
+      //   return 0;
          
       this.dhtReadOneByte();
       R_H = this.bt;
@@ -381,7 +382,8 @@ namespace magibit {
       if (this.currentTem === -99){
         this.dhtStart();
         this.whileGet(1);
-        this.currentTem = this.Temperature;
+        this.whileGet(0);
+        //this.currentTem = this.Temperature;
       }
       return this.Temperature;
     }
@@ -391,7 +393,8 @@ namespace magibit {
         //this.dhtGetHt();
         this.dhtStart();
         this.whileGet(1);
-        this.currentTem = this.Temperature;
+        this.whileGet(0);
+        //this.currentTem = this.Temperature;
       }
       return this.Humidity;
     }
