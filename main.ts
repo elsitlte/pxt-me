@@ -288,29 +288,19 @@ namespace magibit {
     }
 
     dhtReadAck() {
-      if(this.whileGet(1) === 1)
-        return 1;//return 1
-      if(this.whileGet(0) === 1)
-        return 1;//return 1
-      if(this.whileGet(1) === 1)
-        return 1;//return 1
-
-      return 0;
+      this.whileGet(1);
+      this.whileGet(0);
+      this.whileGet(1);
     }
 
-    whileGet(value:number):number {
+    whileGet(value:number) {
       let time_out:number = 0;
-      let TIME_TH:number = 10000;
-      let time_start = input.runningTimeMicros();
-      while((value === this.dhtGet()) && (time_out < TIME_TH)) {
-        time_out ++;
-      }
-      this.Temperature = input.runningTimeMicros() - time_start;
-      this.Humidity = time_out;
-      if(time_out === TIME_TH)
-        return 1;
-      else
-        return 0;
+      //let TIME_TH:number = 10000;
+      //let time_start = +new Date();
+      while(value === this.dhtGet()) {
+        time_out++
+      };
+      this.Humidity=time_out;
     }
 
     dhtReadOneBit() {
