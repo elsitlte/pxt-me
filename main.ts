@@ -301,11 +301,12 @@ namespace magibit {
     whileGet(value:number):number {
       let time_out:number = 0;
       let TIME_TH:number = 10000;
-      let time_start=input.runningTimeMicros();
+      let time_start = input.runningTimeMicros();
       while((value === this.dhtGet()) && (time_out < TIME_TH)) {
         time_out ++;
       }
-      this.Humidity=time_out;
+      this.Temperature = input.runningTimeMicros() - time_start;
+      this.Humidity = time_out;
       if(time_out === TIME_TH)
         return 1;
       else
@@ -388,7 +389,8 @@ namespace magibit {
 
     getTemperature():number {
       if (this.currentTem === -99){
-        this.dhtGetHt();
+        this.dhtStart();
+        this.whileGet(1);
         this.currentTem = this.Temperature;
       }
       return this.Temperature;
