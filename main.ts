@@ -395,9 +395,11 @@ namespace magibit {
     getHumidity():number {
       //if (this.currentTem === -99){
         //this.dhtGetHt();
-        this.dhtStart();
-        this.whileGet(1);
-        this.whileGet(0);
+        let start=input.runningTimeMicros();
+        //this.dhtStart();
+        this.Humidity=input.runningTimeMicros()-start;
+        //this.whileGet(1);
+        //this.whileGet(0);
         //this.currentTem = this.Temperature;
       //}
       return this.Humidity;
