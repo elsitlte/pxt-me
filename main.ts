@@ -291,9 +291,9 @@ namespace magibit {
       if(this.whileGet(1) === 1)
         return 1;//return 1
       if(this.whileGet(0) === 1)
-        return 2;//return 1
+        return 1;//return 1
       if(this.whileGet(1) === 1)
-        return 3;//return 1
+        return 1;//return 1
 
       return 0;
     }
@@ -301,10 +301,11 @@ namespace magibit {
     whileGet(value:number):number {
       let time_out:number = 0;
       let TIME_TH:number = 10000;
+      let time_start=input.runningTimeMicros();
       while((value === this.dhtGet()) && (time_out < TIME_TH)) {
         time_out ++;
       }
-
+      this.Humidity=time_out;
       if(time_out === TIME_TH)
         return 1;
       else
@@ -313,7 +314,7 @@ namespace magibit {
 
     dhtReadOneBit() {
       this.whileGet(0);
-      this.delay_us(60);
+      this.delay_us(50);
       this.bt <<= 1;
       if(1===this.dhtGet()){
         this.bt |= 1;
@@ -362,9 +363,8 @@ namespace magibit {
       let T_L = 0;
 
       this.dhtStart();
-      // if(this.dhtReadAck() === 1)
-      //   return 0;
-      this.Humidity=this.dhtReadAck();
+      if(this.dhtReadAck() === 1)
+        return 0;
          
       this.dhtReadOneByte();
       R_H = this.bt;
@@ -380,10 +380,10 @@ namespace magibit {
       if(CHECKSUM === R_H+R_L+T_H+T_L){
         this.Humidity = R_H;
         this.Temperature = T_H;
-        return 0;
+        return 1;
       }
       else
-        return 1;
+        return 0;
     }
 
     getTemperature():number {
@@ -396,7 +396,9 @@ namespace magibit {
 
     getHumidity():number {
       if (this.currentTem === -99){
-        this.dhtGetHt();
+        //this.dhtGetHt();
+        this.dhtStart();
+        this.whileGet(1);
         this.currentTem = this.Temperature;
       }
       return this.Humidity;
