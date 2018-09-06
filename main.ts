@@ -379,16 +379,15 @@ namespace magibit {
     }
 
     getTemperature():number {
-      //if (this.currentTem === -99){
         this.dhtSet(1);
         this.delay_us(60);
         this.dhtSet(0);
         this.wait_ms(25);
         this.dhtSet(1);
-        this.whileGet(1);
-        this.whileGet(0);
-        //this.currentTem = this.Temperature;
-      //}
+        let start = input.runningTimeMicros();  
+        this.dhtSet(0);
+        this.Temperature = input.runningTimeMicros()-start;
+
       return this.Temperature;
     }
 
