@@ -46,7 +46,7 @@ int MiNodeDHT::dhtGet()
 int MiNodeDHT::whileGet(int v)
 {
   time_out = 0;
-  while((v==dhtGet()) && (time_out < TIME_TH))
+  while(v==dhtGet() && (time_out < TIME_TH))
   {
     time_out ++;
   }
@@ -65,16 +65,11 @@ void MiNodeDHT::dhtStart()
     dhtSet(1);
 }
 
-int MiNodeDHT::dhtReadAck()
+void MiNodeDHT::dhtReadAck()
 {
-    if(whileGet(1) == 1)
-      return 1;
-    if(whileGet(0) == 1)
-      return 1;
-    if(whileGet(1) == 1)
-      return 1;
-
-    return 0;
+    whileGet(1);
+    whileGet(0);
+    whileGet(1);
 }
 
 void MiNodeDHT::dhtReadOneBit()
@@ -109,15 +104,15 @@ void MiNodeDHT::systemTick()
   int temp=0;
   count++;
 
- if (count == 200)
+ if (count == 100)
   {
-    dhtGetHt();
-    if (currentTem == -99)
+    temp = getTemperature();
+     if (currentTem == -99)
     {
-      currentTem = Temperature;
+      currentTem = temp;
     }
 
-    if((Temperature - currentTem == 1) || (currentTem - Temperature == 1))
+    if((temp - currentTem == 1) || (currentTem - temp == 1))
     {
       currentTem = temp;
       MicroBitEvent(this->baseId + this->id, MINODE_DHT_EVT_CHANGE);
@@ -136,8 +131,7 @@ int MiNodeDHT::dhtGetHt()
     int T_L=0;
 
     dhtStart();
-    if(dhtReadAck() == 1)
-      return 0;
+    dhtReadAck();
 
     dhtReadOneByte();
     R_H = bt;
@@ -162,31 +156,19 @@ int MiNodeDHT::dhtGetHt()
 
 int MiNodeDHT::getTemperature()
 {
-  if (currentTem == -99)
-  {
-    dhtGetHt();
-    currentTem = Temperature;
-  }
+  dhtGetHt();
   return Temperature;
 }
 
 int MiNodeDHT::getFahrenheitTemperature()
 {
-  if (currentTem == -99)
-  {
-    dhtGetHt();
-    currentTem = Temperature;
-  }
-  return Temperature*9/5+32;
+  int temp = getTemperature();
+  return temp*9/5+32;
 }
 
 int MiNodeDHT::getHumidity()
 {
-  if (currentTem == -99)
-  {
-    dhtGetHt();
-    currentTem = Temperature;
-  }
+  dhtGetHt();
   return Humidity;
 }
 

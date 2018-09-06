@@ -29,8 +29,6 @@ public:
 
   MiNodeIO io;
   MiNodeModulePool<MiNodeDHT>      dht11;
-  MiNodeModulePool<MiNodePIR>      pir;
-  MiNodeModulePool<MiNodeMIC>      mic;
 
 };
 
