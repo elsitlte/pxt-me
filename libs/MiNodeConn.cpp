@@ -97,18 +97,6 @@ ConnName MiNodeConn::calcConnName(PinName p0)
     case MICROBIT_PIN_P2:
       conn = A2;
       break;
-    case MICROBIT_PIN_P12:
-      conn = D12;
-      break;
-    case MICROBIT_PIN_P13:
-      conn = D13;
-      break;
-    case MICROBIT_PIN_P14:
-      conn = D14;
-      break;
-    case MICROBIT_PIN_P15:
-      conn = D15;
-      break;
     default:
       conn = A0;
       break;

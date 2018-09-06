@@ -1,5 +1,4 @@
-enum ConnName
-{
+enum ConnName{
   //% block="A0" enumval=0
   A0 = 0,
   //% block="A1" enumval=1
@@ -8,8 +7,7 @@ enum ConnName
   A2 = 2
 }
 
-enum AnalogConnName
-{
+enum AnalogConnName{
   //% block="A0" enumval=0
   Analog_A0 = 0,
   //% block="A1" enumval=1
