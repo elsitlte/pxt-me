@@ -385,7 +385,7 @@ namespace magibit {
         this.wait_ms(25);
         this.dhtSet(1);
         let start = input.runningTimeMicros();  
-        this.dhtSet(0);
+        pins.digitalReadPin(DigitalPin.P2);
         this.Temperature = input.runningTimeMicros()-start;
 
       return this.Temperature;
@@ -394,7 +394,8 @@ namespace magibit {
     getHumidity():number {
         this.dhtStart();
         let start = input.runningTimeMicros();  
-        this.dhtGet();
+          pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
+          pins.digitalReadPin(DigitalPin.P2);
         this.Humidity = input.runningTimeMicros()-start;
        
       return this.Humidity;
